@@ -13,7 +13,7 @@ class Parser{
     }
 
     bool ParseStringLit(){
-        if(pos>input.size()||input[pos]!='"')
+        if(pos>=input.size()||input[pos]!='"')
             return false;
         string sub = input.substr(pos+1);
         int ind = sub.find('"');
@@ -26,7 +26,7 @@ class Parser{
     }
 
     bool ParseNumber(){
-        if(pos>input.size())
+        if(pos>=input.size())
             return false;
         int curr=pos;
         while(input[pos]>='0' && input[pos] <= '9' )
@@ -36,7 +36,7 @@ class Parser{
     }
 
     bool ParseChar(char c){
-        if(pos>input.size() || input[pos]!=c)
+        if(pos>=input.size() || input[pos]!=c)
             return false;
         pos++;
         SkipWhiteSpaces();
@@ -117,28 +117,12 @@ class Parser{
 public:
     Parser(string in):input(in){}
 
+    void ChangeIn(string in){
+        input=in;
+        pos=0;
+    }
+    
     bool ParseJSON(){
         return ParseValue();
     }
 };
-
-int main() {
-    string json=  "{\"fares\":[1,2,3,4],\n"
-                   " \"atef\":\"fares\"}";
-    string json2 = "{\"variant\":{\"type\":\"real\",\"value\":12},\"array1d\":[{\"0\":{\"type\":"
-                   "\"real\",\"value\":12}},{\"1\":{\"type\":\"real\",\"value\":12}}],\"array2d\":[{\"1\":[{\"0\":{\"type\":"
-                   "\"real\","
-                   "\"value\":12}},{\"1\":{\"type\":\"real\",\"value\":12222}}]}]}";
-    string json3 = "{\"variant\":{\"type\":\"real\",\"value\":1234},\"array1d\":[{\"0\":{\"type\":"
-                   "\"real\",\"value\":123334}},{\"1\":{\"type\":\"real\",\"value\":12323234}},{\"2\":{\"type\":"
-                   "\"real\",\"value\":1234}}],\"array2d\":[{\"1\":[{\"0\":{\"type\":\"real\",\"value\":1231114}},{\"1\":{\"type\":"
-                   "\"real\",\"value\":9934}},{\"2\":{\"type\":\"real\",\"value\":123767224}}]},{\"2\":[{\"0\":{\"type\":"
-                   "\"real\",\"value\":12899834}},{\"1\":{\"type\":\"real\",\"value\":12389324}},{\"2\":{\"type\":"
-                   "\"real\",\"value\":12349954}}]}]}";
-    Parser parser(json3);
-    if(parser.ParseJSON())
-        cout << "Valid JSON";
-    else
-        cout << "Invalid JSON";
-    return 0;
-}
