@@ -3,7 +3,6 @@ using namespace std;
 
 class Rec_Parser{
     int pos=0;
-    // look_ahead
     string input;
     char look_ahead= input[0];
 
@@ -60,8 +59,6 @@ class Rec_Parser{
         ARRAY   ::= "[" (VALUE ("," VALUE)* )? "]"
     */
 
-
-    // written using recursive descent style
     bool ParseValue(){
         bool res1 = ParseStringLit();
         if(res1) return true;
@@ -161,6 +158,7 @@ public:
     void ChangeIn(string in){
         input=in;
         pos=0;
+        look_ahead=input[0];
     }
 
     bool ParseJSON(){
