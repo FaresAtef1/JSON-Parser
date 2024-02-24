@@ -5,7 +5,7 @@ class Parser{
     int pos=0;
     string input;
 
-    // Lexical
+    // Lexer
 
     void SkipWhiteSpaces(){
         while(pos<input.size()&&(input[pos]==' '||input[pos]=='\n'))
