@@ -11,7 +11,7 @@ class Rec_Parser{
         look_ahead = input[pos];
     }
 
-    // Lexical
+    // Lexer
 
     void SkipWhiteSpaces(){
         while(pos<input.size()&&(input[pos]==' '||input[pos]=='\n'))
